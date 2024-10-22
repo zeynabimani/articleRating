@@ -3,7 +3,7 @@ from django.db import models
 
 class ArticleScore(models.Model):
     mean_score = models.PositiveIntegerField()
-    calculate_time = models.DateTimeField()
+    score_calculate_time = models.DateTimeField()
 
     class Meta:
         abstract = True

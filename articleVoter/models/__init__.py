@@ -1,8 +1,8 @@
-from articleVoter.models.article import Article
-from articleVoter.models.rating import Rating
+from articleVoter.models._article import Article
+from articleVoter.models._rating import Rating
 
 
 __all__ = [
-    Article,
-    Rating,
+    'Article',
+    'Rating',
 ]
