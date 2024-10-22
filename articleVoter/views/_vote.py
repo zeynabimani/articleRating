@@ -20,7 +20,7 @@ class VoteViewSet(viewsets.GenericViewSet,
         kafka_message = {
             'article': article.id,
             'user': request.user.id,
-            'socre': score,
+            'score': score,
         }
         produce_json_to_kafka(kafka_message)
 
@@ -30,5 +30,4 @@ class VoteViewSet(viewsets.GenericViewSet,
         }, status=status.HTTP_201_CREATED)
     
     def get_article(self, id):
-        print(f"iddddddddd {id}")
         return get_object_or_404(Article, id=id)

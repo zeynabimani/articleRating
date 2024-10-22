@@ -135,5 +135,12 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-KAFKA_URL = os.environ.get('KAFKA_URL', 'voter_kafka:9092')
-KAFKA_TOPIC = os.environ.get('KAFKA_TOPIC', 'vote')
+KAFKA_CONFIG ={
+    "URL": os.environ.get('KAFKA_URL', 'voter_kafka:9092'),
+    "TOPIC": os.environ.get('KAFKA_TOPIC', 'vote'),
+    "GROUP_ID": os.environ.get('KAFKA_GROUP_ID', 'vote_group'),
+    "TIME_OUT": int(os.environ.get('KAFKA_TIME_OUT', 500)),
+    "CONSUMER_TIME_THRESHOLD": int(os.environ.get('KAFKA_CONSUME_TIME_THRESHOLD', 500)),
+    "CONSUMER_COUNT_THRESHOLD": int(os.environ.get('KAFKA_CONSUME_COUNT_THRESHOLD', 1000)),
+}
+
