@@ -17,6 +17,22 @@ services:
       - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
     tty: true
 
+  rating-consumer-job:
+    build:
+      context: .
+      dockerfile: Dockerfile-create-rating-job
+    restart: unless-stopped
+    depends_on:
+      - voter_db
+      - voter_kafka
+
+  update-score-cronjob:
+    build:
+      context: .
+      dockerfile: Dockerfile-update-score-job
+    depends_on:
+      - voter_db
+
   voter_db:
     image: postgres:13
     volumes:

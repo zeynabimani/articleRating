@@ -1,0 +1,1 @@
+*/5 * * * * root python /articleVoter/manage.py update_articles_score

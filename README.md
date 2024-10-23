@@ -1,5 +1,35 @@
-# articleRating
-This project is a simplified rating application for an article website
+# Article Rating Application
+
+## Overview
+
+This is a Django application designed for an article rating website. The core functionality is encapsulated within an app called `articleRating`, which features two primary models: `Article` and `Rating`. The application leverages the Django `auth` module for user management, ensuring integrated and secure user authentication.
+
+## Features
+
+- **Models**:
+  - **Article**: Represents the articles users can rate.
+  - **Rating**: Captures the ratings provided by users.
+
+- **ViewSets**:
+  - **Ratings Creation**: Insert a single record in `Rating` tabel.
+  - **Articles Listing**: List articles with their ratings.
+
+## Technology Stack
+
+- **Kafka Integration**: 
+  - Used to handle and store rating records efficiently.
+  - Facilitates `bulk_create` to manage ratings due to the high load of requests.
+  - Processes either batches of 1000 ratings or executes every 500 milliseconds to ensure data consistency.
+  - To address immediate user feedback, client-side caching is recommended so users are not immediately aware of the asynchronous processing.
+
+- **Cron Job**:
+  - A cron job is set up to compute the mean score for each article, running periodically to keep the data updated.
+
+- **Dockerization**:
+  - The project is fully containerized using Docker, allowing it to be deployed seamlessly across various environments, ensuring consistency in execution.
+
+
+Further documentation for the various components and their interactions within the system is provided below.
 
 
 # Project Setup Guide
@@ -61,3 +91,21 @@ curl -X POST http://localhost:8000/articles/<article_id>/vote/ \
      -H "Content-Type: application/json" \
      -d '{"score": 3}'
 ```
+
+## Cronjob
+
+To calculate the mean score for articles, I have implemented a cron job that runs every 5 minutes. The frequency of this job can be adjusted based on our specific needs, as determined by the product manager.
+
+Instead of updating individual ratings, each new rating is inserted into the database. This approach is favored due to the high volume of requests I handle. Using bulk_create for these insertions is more efficient and faster under heavy load.
+
+When computing the mean score for each article, only the most recent score from each user is considered. This ensures that our calculations reflect the latest user evaluations for each article.
+
+
+### Why Cron Instead of Kubernetes
+Given the absence of a Kubernetes environment, I've used a traditional cron-based setup:
+
+**Simplicity:** Easy to implement and manage without needing Kubernetes infrastructure.
+
+**Familiarity:** Cronjobs are straightforward for those accustomed to Unix systems. 
+
+**Flexibility:** Quickly adaptable for development and smaller-scale deployments.

@@ -1,0 +1,18 @@
+FROM python:3.11
+
+RUN apt-get update && \
+    apt-get install -y cron && \
+    apt-get clean
+
+WORKDIR /articleVoter/
+
+COPY . /articleVoter
+COPY update_article_score_cron_job /etc/cron.d/update_article_score_cron_job
+
+RUN pip install -r ./requirements.txt
+
+RUN chmod 0644 /etc/cron.d/update_article_score_cron_job
+
+RUN crontab /etc/cron.d/update_article_score_cron_job
+
+CMD cron && tail -f /var/log/cron.log
