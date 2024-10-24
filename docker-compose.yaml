@@ -13,7 +13,7 @@ services:
       - voter_redis
       - voter_kafka
     environment:
-      - REDIS_URL=redis://redis:6379/0
+      - REDIS_URL=redis://voter_redis:6379/0
       - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
     tty: true
 

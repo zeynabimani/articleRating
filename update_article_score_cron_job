@@ -1,1 +1,1 @@
-*/5 * * * * root python /articleVoter/manage.py update_articles_score
+*/5 * * * * /usr/local/bin/python /articleVoter/manage.py update_articles_score >> /var/log/cron.log 2>&1
