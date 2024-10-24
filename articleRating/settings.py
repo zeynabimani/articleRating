@@ -150,6 +150,9 @@ KAFKA_CONFIG ={
     "TOPIC": os.environ.get('KAFKA_TOPIC', 'vote'),
     "GROUP_ID": os.environ.get('KAFKA_GROUP_ID', 'vote_group'),
     "TIME_OUT": int(os.environ.get('KAFKA_TIME_OUT', 500)),
-    "CONSUMER_TIME_THRESHOLD": int(os.environ.get('KAFKA_CONSUME_TIME_THRESHOLD', 500)),
+    "CONSUMER_TIME_THRESHOLD": int(os.environ.get('KAFKA_CONSU0E_TIME_THRESHOLD', 500)),
     "CONSUMER_COUNT_THRESHOLD": int(os.environ.get('KAFKA_CONSUME_COUNT_THRESHOLD', 1000)),
 }
+
+ARTICLE_PAGE_SIZE = 10
+REDIS_ARTICLE_TTL = 300  # 5 min

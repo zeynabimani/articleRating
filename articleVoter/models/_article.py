@@ -2,7 +2,8 @@ from django.db import models
 
 
 class ArticleScore(models.Model):
-    mean_score = models.PositiveIntegerField()
+    mean_score = models.PositiveIntegerField(default=0)
+    count_score = models.PositiveIntegerField(default=0)
     score_calculate_time = models.DateTimeField()
 
     class Meta:

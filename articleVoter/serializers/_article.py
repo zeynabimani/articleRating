@@ -11,7 +11,6 @@ class ArticleSerializer(serializers.ModelSerializer):
 
     def get_user_score(self, article: Article):
         try:
-            print(f"DDDDSSSSSSSSSSSSSSSSSSSSSSSSSSSSS {article}")
             latest_rating = Rating.objects.filter(
                 user=self.context.get('user'),
                 article_id=article
@@ -31,5 +30,6 @@ class ArticleSerializer(serializers.ModelSerializer):
             'title',
             'text',
             'mean_score',
+            'count_score',
             'user_score',
         )
