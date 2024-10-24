@@ -22,6 +22,9 @@ This is a Django application designed for an article rating website. The core fu
   - Processes either batches of 1000 ratings or executes every 500 milliseconds to ensure data consistency.
   - To address immediate user feedback, client-side caching is recommended so users are not immediately aware of the asynchronous processing.
 
+- **Redis Integration**: 
+  - Used to handle article listing more efficiently.
+
 - **Cron Job**:
   - A cron job is set up to compute the mean score for each article, running periodically to keep the data updated.
 
